@@ -20,3 +20,51 @@ class VrcOscClient:
             self.client.send_message(f"/avatar/parameters/{parameter}", value)
         else:
             raise ValueError("Unsupported value type. Must be bool, int or float.")
+
+    def set_move_forward(self, state:bool) -> None:
+        if state:
+            self.client.send_message("/input/MoveForward", 1)
+        else:
+            self.client.send_message("/input/MoveForward", 0)
+
+    def set_move_backward(self, state:bool) -> None:
+        if state:
+            self.client.send_message("/input/MoveBackward", 1)
+        else:
+            self.client.send_message("/input/MoveBackward", 0)
+
+    def set_move_left(self, state:bool) -> None:
+        if state:
+            self.client.send_message("/input/MoveLeft", 1)
+        else:
+            self.client.send_message("/input/MoveLeft", 0)
+
+    def set_move_right(self, state:bool) -> None:
+        if state:
+            self.client.send_message("/input/MoveRight", 1)
+        else:
+            self.client.send_message("/input/MoveRight", 0)
+
+    def set_turn_left(self, state:bool) -> None:
+        if state:
+            self.client.send_message("/input/LookLeft", 1)
+        else:
+            self.client.send_message("/input/LookLeft", 0)
+
+    def set_turn_right(self, state:bool) -> None:
+        if state:
+            self.client.send_message("/input/LookRight", 1)
+        else:
+            self.client.send_message("/input/LookRight", 0)
+
+    def set_jumping(self, state:bool) -> None:
+        if state:
+            self.client.send_message("/input/Jump", 1)
+        else:
+            self.client.send_message("/input/Jump", 0)
+
+    def set_running(self, state:bool) -> None:
+        if state:
+            self.client.send_message("/input/Run", 1)
+        else:
+            self.client.send_message("/input/Run", 0)
