@@ -4,16 +4,16 @@ class VrcOscClient:
     def __init__(self, ip:str="127.0.0.1", port:int=9000) -> None:
         self.client = SimpleUDPClient(ip, port)
 
-    def set_chatbox(self, message:str, immidiate:bool=True, sfxsound:bool=False) -> None:
+    def chatbox_input(self, message:str, immidiate:bool=True, sfxsound:bool=False) -> None:
         self.client.send_message("/chatbox/input", [message, immidiate, sfxsound])
 
-    def set_typing_indicator(self, state:bool) -> None:
+    def chatbox_typing(self, state:bool) -> None:
         if state:
             self.client.send_message("/chatbox/typing", 1)
         else:
             self.client.send_message("/chatbox/typing", 0)
 
-    def set_avatar_parameter(self, parameter:str, value:any) -> None:
+    def avatar_parameter(self, parameter:str, value:any) -> None:
         if isinstance(value, bool):
             self.client.send_message(f"/avatar/parameters/{parameter}", int(value))
         elif isinstance(value, (int, float)):
@@ -21,49 +21,49 @@ class VrcOscClient:
         else:
             raise ValueError("Unsupported value type. Must be bool, int or float.")
 
-    def set_move_forward(self, state:bool) -> None:
+    def input_moveForward(self, state:bool) -> None:
         if state:
             self.client.send_message("/input/MoveForward", 1)
         else:
             self.client.send_message("/input/MoveForward", 0)
 
-    def set_move_backward(self, state:bool) -> None:
+    def input_moveBackward(self, state:bool) -> None:
         if state:
             self.client.send_message("/input/MoveBackward", 1)
         else:
             self.client.send_message("/input/MoveBackward", 0)
 
-    def set_move_left(self, state:bool) -> None:
+    def input_moveLeft(self, state:bool) -> None:
         if state:
             self.client.send_message("/input/MoveLeft", 1)
         else:
             self.client.send_message("/input/MoveLeft", 0)
 
-    def set_move_right(self, state:bool) -> None:
+    def input_moveRight(self, state:bool) -> None:
         if state:
             self.client.send_message("/input/MoveRight", 1)
         else:
             self.client.send_message("/input/MoveRight", 0)
 
-    def set_turn_left(self, state:bool) -> None:
+    def input_lookLeft(self, state:bool) -> None:
         if state:
             self.client.send_message("/input/LookLeft", 1)
         else:
             self.client.send_message("/input/LookLeft", 0)
 
-    def set_turn_right(self, state:bool) -> None:
+    def input_lookRight(self, state:bool) -> None:
         if state:
             self.client.send_message("/input/LookRight", 1)
         else:
             self.client.send_message("/input/LookRight", 0)
 
-    def set_jumping(self, state:bool) -> None:
+    def input_jump(self, state:bool) -> None:
         if state:
             self.client.send_message("/input/Jump", 1)
         else:
             self.client.send_message("/input/Jump", 0)
 
-    def set_running(self, state:bool) -> None:
+    def input_run(self, state:bool) -> None:
         if state:
             self.client.send_message("/input/Run", 1)
         else:
