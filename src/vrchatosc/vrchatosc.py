@@ -27,3 +27,15 @@ class VRChatOSC:
             typing (bool): Wether the typing indicator is on or off.
         """
         self.client.send_message("/chatbox/typing", typing)
+
+    def toggle_left_quickmenu(self) -> None:
+        """Toggle the left VRChat quickmenu."""
+        self.client.send_message("input/QuickMenuToggleLeft", 0)
+        self.client.send_message("input/QuickMenuToggleLeft", 1)
+        self.client.send_message("input/QuickMenuToggleLeft", 0)
+
+    def toggle_right_quickmenu(self) -> None:
+        """Toggle the right VRChat quickmenu."""
+        self.client.send_message("input/QuickMenuToggleRight", 0)
+        self.client.send_message("input/QuickMenuToggleRight", 1)
+        self.client.send_message("input/QuickMenuToggleRight", 0)
