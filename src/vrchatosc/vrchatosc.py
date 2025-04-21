@@ -19,3 +19,11 @@ class VRChatOSC:
             sound (bool, optional): Wether or not the notification SFX sound will be played. Defaults to False.
         """
         self.client.send_message("/chatbox/input", [text, immediate, sound])
+
+    def chatbox_typing(self, typing:bool) -> None:
+        """Set the state of the VRChat chatbox typing indicator.
+
+        Args:
+            typing (bool): Wether the typing indicator is on or off.
+        """
+        self.client.send_message("/chatbox/typing", typing)
