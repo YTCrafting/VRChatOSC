@@ -93,3 +93,9 @@ class VRChatOSC:
             self.client.send_message("/input/MoveRight", True)
             time.sleep(value)
             self.client.send_message("/input/MoveRight", False)
+
+    def jump(self) -> None:
+        """Jump in VRChat if the world supports it."""
+        self.client.send_message("/input/Jump", True)
+        time.sleep(0.01)
+        self.client.send_message("/input/Jump", False)

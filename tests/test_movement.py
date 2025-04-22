@@ -39,3 +39,11 @@ def test_move_right():
         assert True
     except Exception as e:
         assert False
+
+def test_jump():
+    client = VRChatOSC()
+    try:
+        client.jump()
+        assert True
+    except Exception as e:
+        assert False
