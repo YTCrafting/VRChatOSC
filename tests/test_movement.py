@@ -47,3 +47,23 @@ def test_jump():
         assert True
     except Exception as e:
         assert False
+
+def test_look_left():
+    client = VRChatOSC()
+    try:
+        client.look_left(True)
+        client.look_left(False)
+        client.look_left(1)
+        assert True
+    except Exception as e:
+        assert False
+
+def test_look_right():
+    client = VRChatOSC()
+    try:
+        client.look_right(True)
+        client.look_right(False)
+        client.look_right(1)
+        assert True
+    except Exception as e:
+        assert False

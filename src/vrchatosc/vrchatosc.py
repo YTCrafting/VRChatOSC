@@ -99,3 +99,29 @@ class VRChatOSC:
         self.client.send_message("/input/Jump", True)
         time.sleep(0.01)
         self.client.send_message("/input/Jump", False)
+
+    def look_left(self, value:Union[bool,int]) -> None:
+        """Turns local VRChat player anti-clockwise.
+
+        Args:
+            value (bool or int): Amount of seconds as integer or change left turning state with bool.
+        """
+        if isinstance(value, bool):
+            self.client.send_message("/input/LookLeft", value)
+        elif isinstance(value, int):
+            self.client.send_message("/input/LookLeft", True)
+            time.sleep(value)
+            self.client.send_message("/input/LookLeft", False)
+
+    def look_right(self, value:Union[bool,int]) -> None:
+        """Turns local VRChat player clockwise.
+
+        Args:
+            value (bool or int): Amount of seconds as integer or change right turning state with bool.
+        """
+        if isinstance(value, bool):
+            self.client.send_message("/input/LookRight", value)
+        elif isinstance(value, int):
+            self.client.send_message("/input/LookRight", True)
+            time.sleep(value)
+            self.client.send_message("/input/LookRight", False)
