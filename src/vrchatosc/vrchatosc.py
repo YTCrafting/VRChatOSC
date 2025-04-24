@@ -32,15 +32,15 @@ class VRChatOSC:
 
     def toggle_left_quickmenu(self) -> None:
         """Toggle the left VRChat quickmenu."""
-        self.client.send_message("input/QuickMenuToggleLeft", 0)
-        self.client.send_message("input/QuickMenuToggleLeft", 1)
-        self.client.send_message("input/QuickMenuToggleLeft", 0)
+        self.client.send_message("input/QuickMenuToggleLeft", True)
+        time.sleep(0.01)
+        self.client.send_message("input/QuickMenuToggleLeft", False)
 
     def toggle_right_quickmenu(self) -> None:
         """Toggle the right VRChat quickmenu."""
-        self.client.send_message("input/QuickMenuToggleRight", 0)
-        self.client.send_message("input/QuickMenuToggleRight", 1)
-        self.client.send_message("input/QuickMenuToggleRight", 0)
+        self.client.send_message("input/QuickMenuToggleRight", True)
+        time.sleep(0.01)
+        self.client.send_message("input/QuickMenuToggleRight", False)
 
     def move_forward(self, value:Union[bool,float]) -> None:
         """Moves the local VRChat player forwards.
