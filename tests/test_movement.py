@@ -67,3 +67,12 @@ def test_look_right():
         assert True
     except Exception as e:
         assert False
+
+def test_run():
+    client = VRChatOSC()
+    try:
+        client.run(True)
+        client.run(False)
+        assert True
+    except Exception as e:
+        assert False

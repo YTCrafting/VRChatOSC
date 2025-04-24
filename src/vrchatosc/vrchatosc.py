@@ -125,3 +125,11 @@ class VRChatOSC:
             self.client.send_message("/input/LookRight", True)
             time.sleep(value)
             self.client.send_message("/input/LookRight", False)
+
+    def run(self, state:bool) -> None:
+        """Turn running on and off.
+
+        Args:
+            state (bool): The state for running to be set to.
+        """
+        self.client.send_message("/input/Run", state)
