@@ -4,49 +4,67 @@ import time
 
 class VRChatOSC:
     def __init__(self, ip:str="127.0.0.1", port:int=9000) -> None:
-        """Connect to VRChat's OSC server.
+        """
+        Initialize a connection to VRChat's OSC server.
+
+        Establishes a UDP client to send OSC messages to a running VRChat instance.
 
         Args:
-            ip (str, optional): Local IP address of the computer vrchat is running on. Defaults to "127.0.0.1".
-            port (int, optional): VRChat's open OSC port. Defaults to 9000.
+            ip (str, optional): IP address where VRChat is listening for OSC. Defaults to "127.0.0.1".
+            port (int, optional): Port number for VRChat's OSC server. Defaults to 9000.
         """
         self.client = SimpleUDPClient(ip, port)
 
     def chatbox_input(self, text:str, immediate:bool=True, sound:bool=False) -> None:
-        """Set the text displayed in VRChat's chatbox.
+        """
+        Send text to VRChat's chatbox input field.
+
+        This populates the chatbox with the given message, optionally opening the keyboard UI or playing the notification sound.
 
         Args:
-            text (str): The text to be displayed, wich is limited to 144 characters.
-            immediate (bool, optional): Wether the chatbox is immediately updated or the keyboard opens. Defaults to True.
-            sound (bool, optional): Wether or not the notification SFX sound will be played. Defaults to False.
+            text (str): Message to display (max 144 characters).
+            immediate (bool, optional): If True, updates the chatbox instantly; if False, opens the keyboard. Defaults to True.
+            sound (bool, optional): If True, plays the notification SFX. Defaults to False.
         """
         self.client.send_message("/chatbox/input", [text, immediate, sound])
 
     def chatbox_typing(self, typing:bool) -> None:
-        """Set the state of the VRChat chatbox typing indicator.
+        """
+        Turn VRChat's chatbox typing indicator on or off.
 
         Args:
-            typing (bool): Wether the typing indicator is on or off.
+            typing (bool): True to show the typing indicator; False to hide it.
         """
         self.client.send_message("/chatbox/typing", typing)
 
     def toggle_left_quickmenu(self) -> None:
-        """Toggle the left VRChat quickmenu."""
+        """
+        Toggle the left-side quick menu in VRChat.
+
+        Simulates a quick press to open or close the left Quick Menu.
+        """
         self.client.send_message("input/QuickMenuToggleLeft", True)
         time.sleep(0.01)
         self.client.send_message("input/QuickMenuToggleLeft", False)
 
     def toggle_right_quickmenu(self) -> None:
-        """Toggle the right VRChat quickmenu."""
+        """
+        Toggle the right-side quick menu in VRChat.
+
+        Simulates a quick press to open or close the right Quick Menu.
+        """
         self.client.send_message("input/QuickMenuToggleRight", True)
         time.sleep(0.01)
         self.client.send_message("input/QuickMenuToggleRight", False)
 
     def move_forward(self, value:Union[bool,float]) -> None:
-        """Moves the local VRChat player forwards.
+        """
+        Move the local player forward.
+
+        Can either press/release the forward input or move for a specified duration.
 
         Args:
-            value (bool or float): Amount of seconds as float or change forward walking state with bool.
+            value (bool | float): If bool, True to start moving forward, False to stop. If float, moves forward for the given number of seconds.
         """
         if isinstance(value, bool):
             self.client.send_message("/input/MoveForward", value)
@@ -56,10 +74,13 @@ class VRChatOSC:
             self.client.send_message("/input/MoveForward", False)
 
     def move_backward(self, value:Union[bool,float]) -> None:
-        """Moves the local VRChat player backwards.
+        """
+        Move the local player backward.
+
+        Can either press/release the backward input or move for a specified duration.
 
         Args:
-            value (bool or float): Amount of seconds as float or change backward walking state with bool.
+            value (bool | float): If bool, True to start moving backward, False to stop. If float, moves backward for the given number of seconds.
         """
         if isinstance(value, bool):
             self.client.send_message("/input/MoveBackward", value)
@@ -69,10 +90,13 @@ class VRChatOSC:
             self.client.send_message("/input/MoveBackward", False)
 
     def move_left(self, value:Union[bool,float]) -> None:
-        """Moves the local VRChat player left.
+        """
+        Strafe the local avatar to the left.
+
+        Can either press/release the left input or move for a specified duration.
 
         Args:
-            value (bool or float): Amount of seconds as float or change left walking state with bool.
+            value (bool | float): If bool, True to start strafing left, False to stop. If float, strafes left for the given number of seconds.
         """
         if isinstance(value, bool):
             self.client.send_message("/input/MoveLeft", value)
@@ -82,10 +106,13 @@ class VRChatOSC:
             self.client.send_message("/input/MoveLeft", False)
 
     def move_right(self, value:Union[bool,float]) -> None:
-        """Moves the local VRChat player right.
+        """
+        Strafe the local avatar to the right.
+
+        Can either press/release the right input or move for a specified duration.
 
         Args:
-            value (bool or float): Amount of seconds as float or change right walking state with bool.
+            value (bool | float): If bool, True to start strafing right, False to stop. If float, strafes right for the given number of seconds.
         """
         if isinstance(value, bool):
             self.client.send_message("/input/MoveRight", value)
@@ -95,16 +122,23 @@ class VRChatOSC:
             self.client.send_message("/input/MoveRight", False)
 
     def jump(self) -> None:
-        """Jump in VRChat if the world supports it."""
+        """
+        Make the local player jump.
+
+        Sends a quick press to the jump input; effective only if the world supports jumping.
+        """
         self.client.send_message("/input/Jump", True)
         time.sleep(0.01)
         self.client.send_message("/input/Jump", False)
 
     def look_left(self, value:Union[bool,float]) -> None:
-        """Turns local VRChat player anti-clockwise.
+        """
+        Rotate the local player to the left (counter-clockwise).
+
+        Can either press/release the look-left input or turn over a specified duration.
 
         Args:
-            value (bool or float): Amount of seconds as float or change left turning state with bool.
+            value (bool | float): If bool, True to start turning left, False to stop. If float, turns left for the given number of seconds.
         """
         if isinstance(value, bool):
             self.client.send_message("/input/LookLeft", value)
@@ -114,10 +148,13 @@ class VRChatOSC:
             self.client.send_message("/input/LookLeft", False)
 
     def look_right(self, value:Union[bool,float]) -> None:
-        """Turns local VRChat player clockwise.
+        """
+        Rotate the local player to the right (clockwise).
+
+        Can either press/release the look-right input or turn over a specified duration.
 
         Args:
-            value (bool or float): Amount of seconds as float or change right turning state with bool.
+            value (bool | float): If bool, True to start turning right, False to stop. If float, turns right for the given number of seconds.
         """
         if isinstance(value, bool):
             self.client.send_message("/input/LookRight", value)
@@ -127,9 +164,10 @@ class VRChatOSC:
             self.client.send_message("/input/LookRight", False)
 
     def run(self, state:bool) -> None:
-        """Turn running on and off.
+        """
+        Toggle running mode for the local player.
 
         Args:
-            state (bool): The state for running to be set to.
+            state (bool): True to enable running, False to disable.
         """
         self.client.send_message("/input/Run", state)
