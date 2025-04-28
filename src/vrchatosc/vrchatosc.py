@@ -171,3 +171,19 @@ class VRChatOSC:
             state (bool): True to enable running, False to disable.
         """
         self.client.send_message("/input/Run", state)
+
+    def comfort_turn_left(self) -> None:
+        """
+        Make the local player snap turn to the left. Only works in VR!
+        """
+        self.client.send_message("/input/ComfortLeft", True)
+        time.sleep(0.01)
+        self.client.send_message("/input/ComfortLeft", False)
+
+    def comfort_turn_right(self) -> None:
+        """
+        Make the local player snap turn to the right. Only works in VR!
+        """
+        self.client.send_message("/input/ComfortRight", True)
+        time.sleep(0.01)
+        self.client.send_message("/input/ComfortRight", False)
