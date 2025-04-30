@@ -76,3 +76,19 @@ def test_run():
         assert True
     except Exception as e:
         assert False
+
+def test_comfort_turn_left():
+    client = VRChatOSC()
+    try:
+        client.comfort_turn_left()
+        assert True
+    except Exception as e:
+        assert False
+
+def test_comfort_turn_right():
+    client = VRChatOSC()
+    try:
+        client.comfort_turn_right()
+        assert True
+    except Exception as e:
+        assert False
