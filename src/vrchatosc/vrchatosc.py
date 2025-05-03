@@ -187,3 +187,13 @@ class VRChatOSC:
         self.client.send_message("/input/ComfortRight", True)
         time.sleep(0.01)
         self.client.send_message("/input/ComfortRight", False)
+
+    def avatar_parameter(self, parameter:str, value:any) -> None:
+        """
+        Sets the value of a VRChat avatar parameter.
+
+        Args:
+            parameter (str): Name of the parameter.
+            value (any): Value to set the parameter to.
+        """
+        self.client.send_message(f"/avatar/parameters/{parameter.replace(' ', '_')}", value)
